@@ -74,6 +74,13 @@ class PublishReview(View):
         review.save()
         return redirect('reviews:list-reviews')
 
+class UnpublishReview(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        review_id = self.kwargs.get('review_id')
+        review = get_object_or_404(Review, pk=review_id, state='in_moderation', user=request.user)
+        review.state = 'draft'
+        review.save()
+        return redirect('reviews:list-reviews')
 
 class ListReviews(ListView):
     template_name = 'reviews/list.html'

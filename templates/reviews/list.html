@@ -7,4 +7,14 @@
             href="{% url 'reviews:edit-book-review' review.book.pk review.pk %}"> (edytuj)</a></li>
     {% endfor %}
 </ul>
+
+<td>
+    {% if review.state == 'draft' %}
+    <a href="{% url 'reviews:edit-book-review' review.book.pk review.pk %}">edytuj</a>
+    {% elif review.state == 'in_moderation' %}
+    <form method="POST" action="{% url 'reviews:unpublish-book-review' review.book.pk review.pk %}">
+        {% csrf_token %}<input type="submit" value="Odpublikuj"></form>
+    {% endif %}
+</td>
+{% endfor %}
 {% endblock %}
