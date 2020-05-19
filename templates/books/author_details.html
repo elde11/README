@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load comments %}
+
+
+{% block content %}
+
+
+
+<h1>{{title}}</h1>
+
+<p>{{object}}</p>
+
+<p>Ksiązki tego autora:</p>
+<ul>
+    {% for book in object.book_set.all %}
+    <a href="{% url 'books:book-details' book.pk %}">{{ book }}</a></li>
+    {% endfor %}
+</ul>
+
+
+<h3>Komentarze</h3>
+{% render_comment_form for object %}
+{% render_comment_list for object %}
+
+{% endblock %}

@@ -1,0 +1,88 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --ff-sans: 'Dancing Script', cursive;
+    --ff-headers: 'Dancing Script', , serif;
+    --fw-regular: 400;
+    --fw-bold: 700;
+
+    --fs-h1: 3rem;
+    --fs-h2: 2.25rem;
+    --fs-h3: 1.5rem;
+    --fs-body: 1rem;
+
+    --clr-light: #FFFFFF;
+    --clr-dark: #363636;
+    --clr-accent: #0f76d6;
+}
+
+body {
+    background-color: rgb(208, 204, 212);
+    color: var(--clr-dark);
+    margin: 0;
+
+    font-family: var(--ff-sans);
+    font-size: var(--fs-body);
+    font-weight: var(--fw-regular);
+    line-height: 1.7;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+    line-height: 1;
+    font-weight: var(--fw-bold);
+    font-family: var(--ff-headers);
+}
+
+h1 {
+    font-size: var(--fs-h1);
+    color: var(--clr-primary);
+}
+
+h2 {
+    font-size: var(--fs-h2);
+    color: var(--clr-primary);
+}
+
+h3 {
+    font-size: var(--fs-h3);
+    color: var(--clr-gray);
+}
+
+a {
+    color: var(--clr-accent);
+    text-shadow: crimson;
+    font-size: 19px;
+    text-decoration: darkblue;
+}
+
+p {
+    font-size: 19px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-decoration: cyan;
+}
+
+@media (min-width: 1000px) {
+    body {
+        display: grid;
+        grid-template-columns: 250px 2fr;
+    }
+
+    nav {
+        grid-column: 1/2;
+    }
+
+    main {
+        grid-column: 2/-1;
+    }
+}

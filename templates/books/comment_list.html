@@ -1,0 +1,23 @@
+{% load comments %}
+{% extends "base.html" %}
+{% render_comment_list for book %}
+
+{% block content %}
+{% endfor %}
+{% get_comment_count for entry as comment_count %}.
+{% get_comment_list for book as comment_list %}
+{% for comment in comment_list %}
+
+{% get_comment_count for book as comment_count %}
+
+<p>This book has {{ comment_count }} comments.</p>
+
+{% for comment in comment_list %}
+<a name="c{{ comment.id }}"></a>
+<a href="{% get_comment_permalink comment %}">
+    permalink for comment #{{ forloop.counter }}
+</a>
+
+{% endfor %}
+
+{% endblock %}

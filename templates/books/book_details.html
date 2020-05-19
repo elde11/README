@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load comments %}
+
+{% block content %}
+<h3>Szczegóły książki {{ object.title }}</h3>
+
+{% if request.user.is_authenticated %}
+<p>Oceń książkę!</p>
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Oceń">
+</form>
+{% endif %}
+
+<p>Średnia ocen: {{ avg_grades.average|floatformat:2|default:"&mdash;" }} ({{ avg_grades.count }} ocen)</p>
+
+<p>Autor: <a href="{% url 'books:author-details' object.author.pk %}">{{ object.author }}</a></p>
+<p>Książka ma {{ object.pages }} stron.</p>
+<p>{{ object.description }}</p>
+
+<img src="{{ object.cover.url }}" alt="Okładka książki {{ object.title }}">
+
+<hr>
+<h3>Recenzje</h3>
+
+{% if object.review_set.published %}
+{% for review in object.review_set.published %}
+<section class="review">
+    <h4>{{ review.title }} ({{ review.grade }} / 10)</h4>
+    <p class="details">
+        {{ review.pub_date }} przez {{ review.user.username }}
+    </p>
+    <p>{{ review.content }}</p>
+</section>
+{% endfor %}
+{% elif request.user.is_authenticated %}
+<p><a href="{% url 'reviews:add-book-review' object.pk %}">Brak recenzji - dodaj swoją!</a></p>
+{% else %}
+<p>Brak recenzji. <a href="{% url 'login' %}">Zaloguj się</a>, aby dodać swoją!</p>
+{% endif %}
+
+<hr>
+<h3>Komentarze</h3>
+{% render_comment_form for object %}
+{% render_comment_list for object %}
+
+{% endblock %}

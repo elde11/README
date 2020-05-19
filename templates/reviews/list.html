@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<p>Twoje recenzje: </p>
+<ul>
+    {% for review in object_list %}
+    <li>{{ review.title }} dla książki {{review.book }} <a
+            href="{% url 'reviews:edit-book-review' review.book.pk review.pk %}"> (edytuj)</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

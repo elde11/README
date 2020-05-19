@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Roboto:ital,wght@0,400;0,700;1,300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'books/books.css' %}">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'books:index' %}">Home</a></li>
+            <li><a href="{% url 'books:list-authors' %}">Authors</a></li>
+            <li><a href="{% url 'books:list-books' %}">Books</a></li>
+            <li><a href="{% url 'books:list-categories' %}">Categories</a></li>
+        </ul>
+        {% if request.user.is_authenticated %}
+        <p>Witaj, {{ request.user.first_name }}!</p>
+        <p><a href="{% url 'logout' %}">Wyloguj</a></p>
+        {% else %}
+        <p><a href="{% url 'login' %}">Zaloguj</a></p>
+        {% endif %}
+    </nav>
+    <main>
+
+        <h1>{{ title }}</h1>
+        <br>
+        <br>
+        <img src="{% static 'books/img/przechwytywanie.jpg' %}" alt="fot">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+
+</html>

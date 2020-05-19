@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<p>{{Category}}</p>
+
+<p>{{object.description}}</p>
+<p>All books in this category:</p>
+<ul>
+    {% for book in category.book_set.all %}
+    <li>
+        <a href="{% url 'books:book-details' book.pk %}">{{ book }}</a></li>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

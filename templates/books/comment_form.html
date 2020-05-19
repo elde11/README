@@ -1,0 +1,16 @@
+{% load comments %}
+{% get_comment_form for book as form %}
+{% render_comment_form for book %}
+<table>
+    <form action="{% comment_form_target %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <tr>
+            <td colspan="2">
+                <input type="submit" name="submit" value="Post">
+                <input type="submit" name="preview" value="Preview">
+                <input type="hidden" name="next" value="{% url 'my_comment_was_posted' %}" />
+            </td>
+        </tr>
+    </form>
+</table>
