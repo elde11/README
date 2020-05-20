@@ -1,1 +1,1 @@
-web: guincorn readme.wsgi --log-file -
+web: gunicorn readme.wsgi --log-file -
